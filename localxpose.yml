@@ -1,0 +1,15 @@
+grafana:
+  type: http
+  to: grafana:3000
+  region: eu
+#  subdomain: dockerdo
+loadshedding:
+  type: http
+  to: loadshedding:21445
+  region: eu
+#  subdomain: dockerdo
+influxdb:
+  type: http
+  to: influxdb:8086
+  region: eu
+#  subdomain: dockerdo

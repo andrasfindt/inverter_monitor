@@ -1,0 +1,40 @@
+version: '3.9'
+services:
+  influxdb:
+    hostname: influxdb
+    ports:
+     - '8086:8086'
+    environment:
+      TZ: 'Africa/Johannesburg'
+    volumes:
+      - influxdb_data:/root/.influxdb2
+      - influxdb_data_2:/var/lib/influxdb2
+    image: influxdb:2.0
+  grafana:
+    hostname: grafana
+    ports:
+      - '3000:3000'
+    environment:
+      TZ: 'Africa/Johannesburg'
+    volumes:
+      - grafana_data:/var/lib/grafana
+    image: grafana/grafana-oss
+  loadshedding:
+    hostname: loadshedding
+    ports:
+      - '21445:21445'
+    environment:
+      TZ: 'Africa/Johannesburg'
+    image: docker.io/library/loadshedding:1.0.0
+  localxpose:
+    hostname: localxpose
+    environment:
+      ACCESS_TOKEN: '<>'
+    command: tunnel config -f /config.yaml
+    volumes:
+      - ./localxpose.yml:/config.yaml
+    image: localxpose/localxpose
+volumes:
+  influxdb_data:
+  influxdb_data_2:
+  grafana_data:
